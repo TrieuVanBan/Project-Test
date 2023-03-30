@@ -13,8 +13,8 @@ const Login = () => {
       _ref: any,
       _type: string,
       _placeholder: string,
-      _maxLength: number,
-      _important: boolean
+      _maxLength: number
+      // _important: string
     ) => {
       return (
         <>
@@ -39,8 +39,7 @@ const Login = () => {
         refPhone,
         TYPE_INPUT.PHONE,
         Languages.auth.phone,
-        10,
-        "true"
+        10
       )}
       {/* {renderInput(
         Languages.auth.password,
