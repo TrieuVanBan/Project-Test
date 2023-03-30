@@ -1,0 +1,9 @@
+{
+    "users": [{
+        "id": 1,
+        "name": "Triệu Văn Ban",
+        "phone": "0866824564",
+        "email": "bannshd@gmail.com",
+        "password": "ban2002"
+    }]
+}
