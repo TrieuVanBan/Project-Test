@@ -1,11 +1,56 @@
-import React from 'react'
+import React, { forwardRef, useImperativeHandle } from "react";
+import { TextFieldProps } from "./types";
 
-const MyInputText = () => {
-  return (
-    <>
-        <p>MyInputText</p>
-    </>
-  )
-}
+const MyInputText = forwardRef(
+  (
+    {
+      type,
+      value,
+      label,
+      placeHolder,
+      rightIcon,
+      important,
+      maxLength,
+    }: TextFieldProps,
+    ref?: any
+  ) => {
+    useImperativeHandle(ref, () => ({
+      // setValue,
+      // fillValue,
+      getValue,
+      // focus,
+      // blur,
+      setErrorMsg,
+    }));
 
-export default MyInputText
+    const handleOnChange = (e: any) => {
+      const { value } = e.target;
+      console.log(value);
+    };
+
+    const getValue = () => {};
+
+    const setErrorMsg = () => {};
+
+    return (
+      <>
+        <div>
+          {label && (
+            <label htmlFor="input-field">
+              {label} {important && <span>*</span>}
+            </label>
+          )}
+        </div>
+        <input
+          type={type}
+          // value={value}
+          placeholder={placeHolder}
+          onChange={handleOnChange}
+          maxLength={maxLength}
+        />
+      </>
+    );
+  }
+);
+
+export default MyInputText;
