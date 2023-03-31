@@ -1,5 +1,10 @@
 import React, { forwardRef, useImperativeHandle } from "react";
 import { TextFieldProps } from "./types";
+import classNames from 'classnames/bind';
+import styles from './input.module.scss';
+
+
+const cx = classNames.bind(styles);
 
 const MyInputText = forwardRef(
   (
@@ -34,7 +39,7 @@ const MyInputText = forwardRef(
 
     return (
       <>
-        <div>
+        <div className={cx('text-green')}>
           {label && (
             <label htmlFor="input-field">
               {label} {important && <span>*</span>}

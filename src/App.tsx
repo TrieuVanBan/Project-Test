@@ -12,8 +12,8 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<WebLayout />}>
-          <Route index element={<Signin />} />
-          <Route path="login" element={<Login />} />
+            <Route index element={<Login />} />
+            <Route path="login" element={<Signin />} />
         </Route>
       </Routes>
     </BrowserRouter>
