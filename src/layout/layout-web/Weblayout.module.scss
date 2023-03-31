@@ -1,0 +1,10 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    .widthDiv {
+        width: 70%;
+    }
+    .widthDiv1 {
+        width: 30%;
+    }
+}

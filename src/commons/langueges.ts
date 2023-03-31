@@ -7,9 +7,22 @@ const Languages = {
         passwordCheck: 'Mật khẩu không được ít hơn 8 ký tự',
     },
     auth: {
+        name: "Họ và tên",
+        email: "Email",
         phone: "Số điện thoại",
         password: "Mật khẩu",
-        login: "Đăng nhập"
+        rePwd: "Nhập lại mật khẩu",
+        login: "Đăng nhập",
+        regiter: "Đăng ký",
+        loginGoogle: "Google",
+        titleLogin: "Đăng nhập vào tài khoản bạn ngay",
+        titleRegiter: "Tạo tài khoản ngay bây giờ",
+        savePwd: "Lưu mật khẩu",
+        ForgotPwd: "Quên mật khẩu",
+        or: "Hoặc",
+        noAccount: "Bạn chưa có tài khoản?",
+        registerNow: "Đăng ký ngay",
+        loginNow: "Đăng nhập ngay",
     }
 };
 

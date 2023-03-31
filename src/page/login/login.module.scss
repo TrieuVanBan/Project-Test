@@ -1,0 +1,77 @@
+@import '../../assets/scss';
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 95vh;
+    padding: 0 30px;
+}
+
+.title-login {
+    font-size: 22px;
+    font-weight: 500;
+    color: #595959;
+    margin: 0;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 500;
+    color: $color-black;
+    margin: 10px 0 30px 0;
+}
+
+.savePwd {
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between
+}
+
+.div-all {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.div {
+    height: 1px;
+    display: flex;
+    background-color: $color-gray-e8;
+    width: 100%;
+}
+
+.or {
+    color: $color-gray2;
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.button-login {
+    color: #ffffff;
+    background: $color-green1;
+    width: 100%;
+    padding: 10px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid $color-green1;
+    border-radius: 5px;
+}
+
+.button-google {
+    color: $color-red;
+    background: #ffffff;
+    width: 100%;
+    padding: 10px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid $color-red;
+    border-radius: 5px;
+}
+
+.register-now {
+    color: $color-green1;
+    text-decoration: none;
+    padding-left: 5px;
+}

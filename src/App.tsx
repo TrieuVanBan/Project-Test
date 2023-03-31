@@ -8,12 +8,12 @@ import Login from './page/login/Login'
 function App() {
 
   return (
-    <div className="App">
+    <div className="app">
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<WebLayout />}>
             <Route index element={<Login />} />
-            <Route path="login" element={<Signin />} />
+            <Route path="signin" element={<Signin />} />
         </Route>
       </Routes>
     </BrowserRouter>
