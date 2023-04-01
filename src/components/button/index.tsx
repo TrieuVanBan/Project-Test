@@ -27,11 +27,11 @@ const Button = ({
     <div>
       <button
         className={cx(`${containButtonStyles ? containButtonStyles : ''}`)}
-        {...rightIcon &&
-        <MyImage
-          src={rightIcon}
-          className={rightIconStyles ? cx(`${rightIconStyles}`) : cx('icon-right-styles')}
-        />}
+        // {...rightIcon &&
+        // <MyImage
+        //   src={rightIcon}
+        //   className={rightIconStyles ? cx(`${rightIconStyles}`) : cx('icon-right-styles')}
+        // />}
       >
         {label}
       </button>

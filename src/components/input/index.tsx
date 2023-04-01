@@ -30,24 +30,34 @@ const MyInputText = forwardRef(
       setErrorMsg,
     }));
 
-    const [valueText, setValueText] = useState<any>(`${value}`);
+    const [valueText, setValueText] = useState<any>('');
     const [errMsg, setErrMsg] = useState<string>('');
     const [isFocus, setIsFocus] = useState<boolean>(false);
     const orgTextInput = useRef<HTMLInputElement>(null);
 
-    const handleOnChange = (e: any) => {
-      const { value } = e.target;
-      console.log(value);
-    };
+    // const handleOnChange = (e: any) => {
+    //   const { value } = e.target;
+    //   console.log(value);
+    // };
 
-    const getValue = () => { };
+    const _onChangeText = (e: any) => {
+      setErrMsg('');
+      const { value } = e.target;
+      setValueText(value)
+    }
+
+    const getValue = () => {
+      return valueText
+    };
     const setErrorMsg = () => {};
+
     const focus = useCallback(() => {
       if (orgTextInput.current) {
         orgTextInput.current?.focus();
       }
       setIsFocus(true)
     }, [])
+
     const blur = useCallback(() => {
       if (orgTextInput.current) {
         orgTextInput.current?.blur();
@@ -72,7 +82,7 @@ const MyInputText = forwardRef(
             onFocus={focus}
             onBlur={blur}
             placeholder={placeHolder}
-            onChange={handleOnChange}
+            onChange={_onChangeText}
             maxLength={maxLength}
             className={cx(
               `${inputStyle ? inputStyle : 'input-style'}`, `${!disabled ? '' : 'disable-input-container'}`

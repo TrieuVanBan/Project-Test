@@ -1,17 +1,3 @@
-// import React from 'react'
-
-// type Props = {}
-
-// const Signin = (props: Props) => {
-//   return (
-//     <>
-//         <p>Signin</p>
-//     </>
-//   )
-// }
-
-// export default Signin
-
 import React, { useCallback, useMemo, useRef } from "react";
 import IcGoogle from '../../assets/icon/ic_google.svg';
 import MyInputText from "../../components/input";
@@ -22,12 +8,18 @@ import classNames from 'classnames/bind';
 import styles from './Signin.module.scss';
 import Button from "../../components/button";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import RadioGroup from "../../components/radio-group";
 
 const cx = classNames.bind(styles);
+const url = "http://localhost:5000/users"
 
 const Signin = () => {
+  const refName = useRef<TextFieldActions>(null);
   const refPhone = useRef<TextFieldActions>(null);
   const refPassword = useRef<TextFieldActions>(null);
+  const refEmail = useRef<TextFieldActions>(null);
+  const refRePwd = useRef<TextFieldActions>(null);
 
   const renderInput = useCallback(
     (
@@ -36,7 +28,6 @@ const Signin = () => {
       _type: string,
       _placeholder: string,
       _maxLength?: number
-      // _important: string
     ) => {
       return (
         <MyInputText
@@ -51,6 +42,17 @@ const Signin = () => {
     },
     []
   );
+
+  const rederInputRadio = useCallback((_type: string, _label: string, _name: string, _title?: string) => {
+    return (
+      <RadioGroup
+        type={_type}
+        label={_label}
+        name={_name}
+        title={_title}
+      />
+    )
+  }, [])
 
   const renderButtonLogin = useMemo(() => {
     return (
@@ -71,24 +73,44 @@ const Signin = () => {
     )
   }, [])
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+
+    // add user
+    // await axios.post(url, {
+    //   name: refName.current?.getValue(),
+    //   phone: refPhone.current?.getValue(),
+    //   email: refEmail.current?.getValue(),
+    //   password: refPassword.current?.getValue()
+    // })
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+  }
+
+
   return (
     <div className={cx("login")}>
-      <p className={cx("title-login")}>{Languages.auth.login}</p>
-      <p className={cx("title")}>{Languages.auth.titleLogin}</p>
-      <form className={cx("form")}>
-        {/* {renderInput(
+      <p className={cx("title-login")}>{Languages.auth.regiter}</p>
+      <p className={cx("title")}>{Languages.auth.titleRegiter}</p>
+      <form className={cx("form")} onSubmit={handleSubmit}>
+        {renderInput(
           Languages.auth.name,
-          refPhone,
+          refName,
           TYPE_INPUT.TEXT,
           Languages.auth.name,
           30
         )}
-          {renderInput(
+        {renderInput(
           Languages.auth.email,
-          refPhone,
+          refEmail,
           TYPE_INPUT.EMAIL,
           Languages.auth.email
-        )} */}
+        )}
         {renderInput(
           Languages.auth.phone,
           refPhone,
@@ -102,17 +124,16 @@ const Signin = () => {
           TYPE_INPUT.PASSWORD,
           Languages.auth.password
         )}
-        {/* {renderInput(
+        {renderInput(
           Languages.auth.rePwd,
-          refPhone,
+          refRePwd,
           TYPE_INPUT.PASSWORD,
           Languages.auth.rePwd
-        )} */}
+        )}
         <div className={cx("savePwd")}>
-          <a href="" style={{ fontSize: "14px", color: "blue", textDecoration: "none", display: "flex", alignItems: "center" }}> <input type="checkbox" />Lưu mật khẩu </a>
-          <a href="" style={{ fontSize: "14px", color: "blue", textDecoration: "none" }}>Quên mật khẩu</a>
+          {rederInputRadio(TYPE_INPUT.RADIO, Languages.common.yes, "yes", Languages.auth.questionIsEmployee)}
+          {rederInputRadio(TYPE_INPUT.RADIO, Languages.common.no, "no")}
         </div>
-        {/* {renderButton(Languages.auth.login)} */}
         {renderButtonLogin}
         <div className={cx("div-all")}>
           <div className={cx("div")}></div>
@@ -122,7 +143,7 @@ const Signin = () => {
         {renderButtonGoogle}
         <p>
           <span>{Languages.auth.noAccount}</span>
-          <Link to={"/signin"} className={cx("register-now")}>{Languages.auth.registerNow}</Link>
+          <Link to={"/"} className={cx("register-now")}>{Languages.auth.registerNow}</Link>
         </p>
       </form>
     </div>
