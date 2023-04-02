@@ -1,18 +1,19 @@
 import React, { useCallback, useMemo, useRef } from "react";
-import IcGoogle from '../../assets/icon/ic_google.svg';
+import IcGoogle from "../../assets/icon/ic_google.svg";
 import MyInputText from "../../components/input";
 import { TextFieldActions } from "../../components/input/types";
 import { TYPE_INPUT } from "../../commons/constants";
 import Languages from "../../commons/langueges";
-import classNames from 'classnames/bind';
-import styles from './Signin.module.scss';
+import classNames from "classnames/bind";
+import styles from "./Signin.module.scss";
 import Button from "../../components/button";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import RadioGroup from "../../components/radio-group";
+import formValidate from "../../utils/form-validate";
 
 const cx = classNames.bind(styles);
-const url = "http://localhost:5000/users"
+const url = "http://localhost:5000/users";
 
 const Signin = () => {
   const refName = useRef<TextFieldActions>(null);
@@ -20,6 +21,37 @@ const Signin = () => {
   const refPassword = useRef<TextFieldActions>(null);
   const refEmail = useRef<TextFieldActions>(null);
   const refRePwd = useRef<TextFieldActions>(null);
+
+  const navigate = useNavigate();
+
+  // Validate Form
+  const isValidateForm = () => {
+    const _name = refName.current?.getValue();
+    const _phone = refPhone.current?.getValue();
+    const _email = refEmail.current?.getValue();
+    const _password = refPassword.current?.getValue();
+    const _rePwd = refRePwd.current?.getValue();
+
+    const errMsgName = formValidate.userNameValidateSignUp(_name);
+    const errMsgPhone = formValidate.passConFirmPhone(_phone);
+    const errMsgEmail = formValidate.emailValidate(_email);
+    const errMsgPassword = formValidate.passValidate(_password);
+    const errMsgRePwd = formValidate.passConFirmValidate(_password, _rePwd);
+
+    refName.current?.setErrorMsg(errMsgName);
+    refPhone.current?.setErrorMsg(errMsgPhone);
+    refEmail.current?.setErrorMsg(errMsgEmail);
+    refPassword.current?.setErrorMsg(errMsgPassword);
+    refRePwd.current?.setErrorMsg(errMsgRePwd);
+
+    return (
+      !errMsgName &&
+      !errMsgPhone &&
+      !errMsgEmail &&
+      !errMsgPassword &&
+      !errMsgRePwd
+    );
+  };
 
   const renderInput = useCallback(
     (
@@ -43,16 +75,14 @@ const Signin = () => {
     []
   );
 
-  const rederInputRadio = useCallback((_type: string, _label: string, _name: string, _title?: string) => {
-    return (
-      <RadioGroup
-        type={_type}
-        label={_label}
-        name={_name}
-        title={_title}
-      />
-    )
-  }, [])
+  const rederInputRadio = useCallback(
+    (_type: string, _label: string, _name: string, _title?: string) => {
+      return (
+        <RadioGroup type={_type} label={_label} name={_name} title={_title} />
+      );
+    },
+    []
+  );
 
   const renderButtonLogin = useMemo(() => {
     return (
@@ -60,8 +90,8 @@ const Signin = () => {
         label={Languages.auth.login}
         containButtonStyles={cx("button-login")}
       />
-    )
-  }, [])
+    );
+  }, []);
 
   const renderButtonGoogle = useMemo(() => {
     return (
@@ -70,28 +100,31 @@ const Signin = () => {
         containButtonStyles={cx("button-google")}
         rightIcon={IcGoogle}
       />
-    )
-  }, [])
+    );
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-
-    // add user
-    // await axios.post(url, {
-    //   name: refName.current?.getValue(),
-    //   phone: refPhone.current?.getValue(),
-    //   email: refEmail.current?.getValue(),
-    //   password: refPassword.current?.getValue()
-    // })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-  }
-
+    if (isValidateForm()) {
+      // add user
+      await axios
+        .post(url, {
+          name: refName.current?.getValue(),
+          phone: refPhone.current?.getValue(),
+          email: refEmail.current?.getValue(),
+          password: refPassword.current?.getValue(),
+        })
+        .then((response) => {
+          console.log(response.data);
+          alert("Bạn đã đăng ký tài khoản thành công!");
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <div className={cx("login")}>
@@ -131,7 +164,12 @@ const Signin = () => {
           Languages.auth.rePwd
         )}
         <div className={cx("savePwd")}>
-          {rederInputRadio(TYPE_INPUT.RADIO, Languages.common.yes, "yes", Languages.auth.questionIsEmployee)}
+          {rederInputRadio(
+            TYPE_INPUT.RADIO,
+            Languages.common.yes,
+            "yes",
+            Languages.auth.questionIsEmployee
+          )}
           {rederInputRadio(TYPE_INPUT.RADIO, Languages.common.no, "no")}
         </div>
         {renderButtonLogin}
@@ -143,7 +181,9 @@ const Signin = () => {
         {renderButtonGoogle}
         <p>
           <span>{Languages.auth.noAccount}</span>
-          <Link to={"/"} className={cx("register-now")}>{Languages.auth.registerNow}</Link>
+          <Link to={"/"} className={cx("register-now")}>
+            {Languages.auth.registerNow}
+          </Link>
         </p>
       </form>
     </div>

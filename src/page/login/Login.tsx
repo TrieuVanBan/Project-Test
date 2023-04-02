@@ -22,7 +22,6 @@ const Login = () => {
       _type: string,
       _placeholder: string,
       _maxLength?: number
-      // _important: string
     ) => {
       return (
           <MyInputText

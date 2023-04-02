@@ -4,11 +4,18 @@ const Languages = {
         no: "Không"
     },
     errorMsg: {
+        userNameRequired: 'Họ và tên không được để trống',
+        userNameLength: 'Họ và tên không được ít hơn 8 ký tự',
         userPhoneEmpty: 'Số điện thoại không được để trống',
         phoneCount: 'Số điện thoại chỉ được 10 số',
         phoneRegex: 'Số điện thoại không đúng định dạng',
+        emailNull: 'Email không được để trống',
+        emailRegex: 'Email không đúng định dạng',
         userPasswordNull: 'Mật khẩu không được để trống',
         passwordCheck: 'Mật khẩu không được ít hơn 8 ký tự',
+        errMsgEmpty: 'Mật khẩu nhập không được để trống',
+        errMsgLength: 'Mật khẩu nhập phải từ 8 kí tự trở lên',
+        conFirmPwd: 'Xác nhận mật khẩu không trùng khớp với mật khẩu',
     },
     auth: {
         name: "Họ và tên",

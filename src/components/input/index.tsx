@@ -1,7 +1,8 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from "react";
+import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { TextFieldProps } from "./types";
 import classNames from 'classnames/bind';
 import styles from './input.module.scss';
+import validate from "../../utils/validate";
 
 const cx = classNames.bind(styles);
 
@@ -49,7 +50,20 @@ const MyInputText = forwardRef(
     const getValue = () => {
       return valueText
     };
-    const setErrorMsg = () => {};
+
+    const setErrorMsg = useCallback((msg: string) => {
+      if (validate.isStringEmpty(msg)) {
+        return setErrMsg('');
+      }
+      setErrMsg(msg);
+    }, []);
+
+    const errorMessage = useMemo(() => {
+      if (!validate.isStringEmpty(errMsg)) {
+        return <span className={cx("errorMessage")}>{errMsg}</span>;
+      }
+      return null;
+    }, [errMsg]);
 
     const focus = useCallback(() => {
       if (orgTextInput.current) {
@@ -89,6 +103,7 @@ const MyInputText = forwardRef(
             )}
           />
         </div>
+        {errorMessage}
       </div>
     );
   }

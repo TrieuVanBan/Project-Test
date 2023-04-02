@@ -1,9 +1,32 @@
 {
-    "users": [{
-        "id": 1,
-        "name": "Triệu Văn Ban",
-        "phone": "0866824564",
-        "email": "bannshd@gmail.com",
-        "password": "ban2002"
-    }]
+  "users": [
+    {
+      "id": 1,
+      "name": "Triệu Văn Ban",
+      "phone": "0866824564",
+      "email": "bannshd@gmail.com",
+      "password": "ban2002"
+    },
+    {
+      "name": "ban12345",
+      "phone": "0943243247",
+      "email": "ban21032002@gmail.com",
+      "password": "12345678",
+      "id": 2
+    },
+    {
+      "name": "Ban12345",
+      "phone": "0953535354",
+      "email": "ban21032002@gmail.com",
+      "password": "12345678",
+      "id": 3
+    },
+    {
+      "name": "bsaasfsf",
+      "phone": "0866824564",
+      "email": "ban21032002@gmail.com",
+      "password": "12345678",
+      "id": 4
+    }
+  ]
 }
