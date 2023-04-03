@@ -7,13 +7,55 @@ import Languages from "../../commons/langueges";
 import classNames from 'classnames/bind';
 import styles from './login.module.scss';
 import Button from "../../components/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import formValidate from "../../utils/form-validate";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
+const url = "http://localhost:5000/users";
 
 const Login = () => {
   const refPhone = useRef<TextFieldActions>(null);
   const refPassword = useRef<TextFieldActions>(null);
+
+  const navigate = useNavigate()
+
+  const isValidateForm = () => {
+    const _phone = refPhone.current?.getValue()
+    const _password = refPassword.current?.getValue()
+
+    const errMsgPhone = formValidate.passConFirmPhone(_phone)
+    const errMsgPassword = formValidate.passValidate(_password)
+
+    refPhone.current?.setErrorMsg(errMsgPhone);
+    refPassword.current?.setErrorMsg(errMsgPassword);
+
+
+    return !errMsgPhone && !errMsgPassword
+  }
+
+  const SubmitForm = (e: any) => {
+    e.preventDefault();
+
+    if (isValidateForm()) {
+      axios.get(url)
+        .then((res) => {
+          const isValidUser = res.data.find(
+            (item: any) => {
+              // if (item.phone == refPhone.current?.getValue() && item.password == refPassword.current?.getValue()) {
+              //   alert("Đăng nhập thành công")
+              //   navigate("/admin")
+              // } else {
+              //   alert("Tài khoản hoặc mật khẩu không chính xác")
+              // }
+              return item.phone == refPhone.current?.getValue() && item.password == refPassword.current?.getValue()
+            }
+          );
+          alert(isValidUser ? "Đăng nhập thành công" : "Tài khoản hoặc mật khẩu không chính xác");
+        });
+    }
+
+  }
 
   const renderInput = useCallback(
     (
@@ -60,20 +102,7 @@ const Login = () => {
     <div className={cx("login")}>
       <p className={cx("title-login")}>{Languages.auth.login}</p>
       <p className={cx("title")}>{Languages.auth.titleLogin}</p>
-      <form className={cx("form")}>
-        {/* {renderInput(
-          Languages.auth.name,
-          refPhone,
-          TYPE_INPUT.TEXT,
-          Languages.auth.name,
-          30
-        )}
-          {renderInput(
-          Languages.auth.email,
-          refPhone,
-          TYPE_INPUT.EMAIL,
-          Languages.auth.email
-        )} */}
+      <form className={cx("form")} onSubmit={SubmitForm}>
         {renderInput(
           Languages.auth.phone,
           refPhone,
@@ -87,17 +116,10 @@ const Login = () => {
           TYPE_INPUT.PASSWORD,
           Languages.auth.password
         )}
-        {/* {renderInput(
-          Languages.auth.rePwd,
-          refPhone,
-          TYPE_INPUT.PASSWORD,
-          Languages.auth.rePwd
-        )} */}
         <div className={cx("savePwd")}>
-          <a href="" style={{ fontSize: "14px", color: "blue", textDecoration: "none", display: "flex", alignItems: "center" }}> <input type="checkbox" />Lưu mật khẩu </a>
-          <a href="" style={{ fontSize: "14px", color: "blue", textDecoration: "none" }}>Quên mật khẩu</a>
+          <Link to={""} style={{ fontSize: "14px", color: "blue", textDecoration: "none", display: "flex", alignItems: "center" }}> <input type="checkbox" />Lưu mật khẩu </Link>
+          <Link to={"forgotPwd"} style={{ fontSize: "14px", color: "blue", textDecoration: "none" }}>Quên mật khẩu</Link>
         </div>
-        {/* {renderButton(Languages.auth.login)} */}
         {renderButtonLogin}
         <div className={cx("div-all")}>
           <div className={cx("div")}></div>
