@@ -87,7 +87,7 @@ const Signin = () => {
   const renderButtonLogin = useMemo(() => {
     return (
       <Button
-        label={Languages.auth.login}
+        label={Languages.auth.register}
         containButtonStyles={cx("button-login")}
       />
     );
@@ -141,7 +141,7 @@ const Signin = () => {
         {renderInput(
           Languages.auth.email,
           refEmail,
-          TYPE_INPUT.EMAIL,
+          TYPE_INPUT.TEXT,
           Languages.auth.email
         )}
         {renderInput(
@@ -182,7 +182,7 @@ const Signin = () => {
         <p>
           <span>{Languages.auth.noAccount}</span>
           <Link to={"/"} className={cx("register-now")}>
-            {Languages.auth.registerNow}
+            {Languages.auth.loginNow}
           </Link>
         </p>
       </form>
