@@ -128,7 +128,7 @@ const Signin = () => {
 
   return (
     <div className={cx("login")}>
-      <p className={cx("title-login")}>{Languages.auth.regiter}</p>
+      <p className={cx("title-login")}>{Languages.auth.register}</p>
       <p className={cx("title")}>{Languages.auth.titleRegiter}</p>
       <form className={cx("form")} onSubmit={handleSubmit}>
         {renderInput(
