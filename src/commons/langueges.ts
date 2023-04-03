@@ -24,7 +24,7 @@ const Languages = {
         password: "Mật khẩu",
         rePwd: "Nhập lại mật khẩu",
         login: "Đăng nhập",
-        regiter: "Đăng ký",
+        register: "Đăng ký",
         loginGoogle: "Google",
         titleLogin: "Đăng nhập vào tài khoản bạn ngay",
         titleRegiter: "Tạo tài khoản ngay bây giờ",
@@ -35,6 +35,10 @@ const Languages = {
         registerNow: "Đăng ký ngay",
         loginNow: "Đăng nhập ngay",
         questionIsEmployee: 'Bạn có phải là CBNV của tập đoàn NextTech không?',
+        changePwd:"Đổi mật khẩu",
+        welcome:"CHÀO MỪNG ĐẾN VỚI ĐẦU TƯ TIỆN NGAY",
+        build:"Xây dựng tương lai",
+        approach:"Tiếp cận nhanh chóng các khoản đầu tư có chất lượng cao",
     }
 };
 
