@@ -5,6 +5,9 @@
     justify-content: center;
     height: 100vh;
     padding: 0 30px;
+    @include mobile {
+        height: 90vh;
+    }
 }
 
 .title-login {

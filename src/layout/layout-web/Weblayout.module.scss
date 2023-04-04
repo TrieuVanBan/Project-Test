@@ -1,14 +1,80 @@
-// .row {
-//   display: flex;
-//   flex-direction: row;
-//   .widthDiv {
-//     width: 70%;
-//   }
-//   .widthDiv1 {
-//     width: 30%;
-//   }
-// }
+
+@import '../../assets/scss';
+
 .root-container {
+    display: flex;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container {
+    justify-content: center;
+    flex: 1;
+    display: flex;
+}
+
+.left-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px 0px;
+    color: #ffffff;
+    .img-logo {
+        width: auto;
+        height: 90px;
+    }
+    .style-welcome {
+        font-weight: 600;
+        font-size: 40px;
+        line-height: 40px;
+        margin-top: 40px;
+        text-align: center;
+        @include mobile {
+            font-size: 30px;
+            padding: 0 20px;
+        }
+    }
+    .style-build {
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 40px;
+        margin-top: 15px;
+        @include mobile {
+            font-size: 28px;
+        }
+    }
+    .style-approach {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 40px;
+        margin-top: 5px;
+        text-align: center;
+        padding: 0 20px;
+        @include mobile {
+            line-height: 28px;
+        }
+    }
+    .style-download {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 30px;
+        margin-top: 40px;
+    }
+}
+
+.img-download {
+    display: flex;
+    margin-top: 20px;
+    .link_down {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-right: 30px;
+    }
+}
   display: flex;
   height: 100%;
   overflow-y: auto;
