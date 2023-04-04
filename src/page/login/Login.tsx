@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo, useRef } from "react";
-import IcGoogle from '../../assets/icon/ic_google.svg';
+import IcGoogle from "../../assets/icon/ic_google.svg";
+import IcPhone from "../../assets/icon/ic_phone.svg";
 import MyInputText from "../../components/input";
 import { TextFieldActions } from "../../components/input/types";
 import { TYPE_INPUT } from "../../commons/constants";
 import Languages from "../../commons/langueges";
-import classNames from 'classnames/bind';
-import styles from './login.module.scss';
+import classNames from "classnames/bind";
+import styles from "./login.module.scss";
 import Button from "../../components/button";
 import { Link, useNavigate } from "react-router-dom";
 import formValidate from "../../utils/form-validate";
@@ -18,44 +19,46 @@ const Login = () => {
   const refPhone = useRef<TextFieldActions>(null);
   const refPassword = useRef<TextFieldActions>(null);
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const isValidateForm = () => {
-    const _phone = refPhone.current?.getValue()
-    const _password = refPassword.current?.getValue()
+    const _phone = refPhone.current?.getValue();
+    const _password = refPassword.current?.getValue();
 
-    const errMsgPhone = formValidate.passConFirmPhone(_phone)
-    const errMsgPassword = formValidate.passValidate(_password)
+    const errMsgPhone = formValidate.passConFirmPhone(_phone);
+    const errMsgPassword = formValidate.passValidate(_password);
 
     refPhone.current?.setErrorMsg(errMsgPhone);
     refPassword.current?.setErrorMsg(errMsgPassword);
 
-
-    return !errMsgPhone && !errMsgPassword
-  }
+    return !errMsgPhone && !errMsgPassword;
+  };
 
   const SubmitForm = (e: any) => {
     e.preventDefault();
 
     if (isValidateForm()) {
-      axios.get(url)
-        .then((res) => {
-          const isValidUser = res.data.find(
-            (item: any) => {
-              // if (item.phone == refPhone.current?.getValue() && item.password == refPassword.current?.getValue()) {
-              //   alert("Đăng nhập thành công")
-              //   navigate("/admin")
-              // } else {
-              //   alert("Tài khoản hoặc mật khẩu không chính xác")
-              // }
-              return item.phone == refPhone.current?.getValue() && item.password == refPassword.current?.getValue()
-            }
+      axios.get(url).then((res) => {
+        const isValidUser = res.data.find((item: any) => {
+          // if (item.phone == refPhone.current?.getValue() && item.password == refPassword.current?.getValue()) {
+          //   alert("Đăng nhập thành công")
+          //   navigate("/admin")
+          // } else {
+          //   alert("Tài khoản hoặc mật khẩu không chính xác")
+          // }
+          return (
+            item.phone == refPhone.current?.getValue() &&
+            item.password == refPassword.current?.getValue()
           );
-          alert(isValidUser ? "Đăng nhập thành công" : "Tài khoản hoặc mật khẩu không chính xác");
         });
+        alert(
+          isValidUser
+            ? "Đăng nhập thành công"
+            : "Tài khoản hoặc mật khẩu không chính xác"
+        );
+      });
     }
-
-  }
+  };
 
   const renderInput = useCallback(
     (
@@ -63,16 +66,18 @@ const Login = () => {
       _ref: any,
       _type: string,
       _placeholder: string,
+      // _rightIcon: string,
       _maxLength?: number
     ) => {
       return (
-          <MyInputText
-            label={_label}
-            ref={_ref}
-            type={_type}
-            placeHolder={_placeholder}
-            maxLength={_maxLength}
-            important
+        <MyInputText
+          label={_label}
+          ref={_ref}
+          type={_type}
+          placeHolder={_placeholder}
+          // rightIcon={_rightIcon}
+          maxLength={_maxLength}
+          important
         />
       );
     },
@@ -85,8 +90,8 @@ const Login = () => {
         label={Languages.auth.login}
         containButtonStyles={cx("button-login")}
       />
-    )
-  }, [])
+    );
+  }, []);
 
   const renderButtonGoogle = useMemo(() => {
     return (
@@ -95,8 +100,8 @@ const Login = () => {
         containButtonStyles={cx("button-google")}
         rightIcon={IcGoogle}
       />
-    )
-  }, [])
+    );
+  }, []);
 
   return (
     <div className={cx("login")}>
@@ -108,6 +113,7 @@ const Login = () => {
           refPhone,
           TYPE_INPUT.PHONE,
           Languages.auth.phone,
+          // rightIcon={IcPhone},
           10
         )}
         {renderInput(
@@ -115,10 +121,33 @@ const Login = () => {
           refPassword,
           TYPE_INPUT.PASSWORD,
           Languages.auth.password
+          // rightIcon={IcPhone}
         )}
         <div className={cx("savePwd")}>
-          <Link to={""} style={{ fontSize: "14px", color: "gray", textDecoration: "none", display: "flex", alignItems: "center" }}> <input type="checkbox" />Lưu mật khẩu </Link>
-          <Link to={"forgotPwd"} style={{ fontSize: "14px", color: "#c62828", textDecoration: "none" }}>Quên mật khẩu</Link>
+          <Link
+            to={""}
+            style={{
+              fontSize: "14px",
+              color: "gray",
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {" "}
+            <input type="checkbox" />
+            Lưu mật khẩu{" "}
+          </Link>
+          <Link
+            to={"forgotPwd"}
+            style={{
+              fontSize: "14px",
+              color: "#c62828",
+              textDecoration: "none",
+            }}
+          >
+            Quên mật khẩu
+          </Link>
         </div>
         {renderButtonLogin}
         <div className={cx("div-all")}>
@@ -129,7 +158,9 @@ const Login = () => {
         {renderButtonGoogle}
         <p>
           <span>{Languages.auth.noAccount}</span>
-          <Link to={"/signin"} className={cx("register-now")}>{Languages.auth.registerNow}</Link>
+          <Link to={"/signin"} className={cx("register-now")}>
+            {Languages.auth.registerNow}
+          </Link>
         </p>
       </form>
     </div>

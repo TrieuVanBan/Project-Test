@@ -1,8 +1,17 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { TextFieldProps } from "./types";
-import classNames from 'classnames/bind';
-import styles from './input.module.scss';
+import classNames from "classnames/bind";
+import styles from "./input.module.scss";
 import validate from "../../utils/validate";
+import IcPwdShow from "../../assets/icon/ic_pwd_show.svg";
+import IcPwdHide from "../../assets/icon/ic_pwd_hide.svg";
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +23,7 @@ const MyInputText = forwardRef(
       label,
       placeHolder,
       rightIcon,
+      onClickRightIcon,
       containerInput,
       inputStyle,
       disabled,
@@ -31,29 +41,46 @@ const MyInputText = forwardRef(
       setErrorMsg,
     }));
 
-    const [valueText, setValueText] = useState<any>('');
-    const [errMsg, setErrMsg] = useState<string>('');
+    const [valueText, setValueText] = useState<any>("");
+    const [showPwd, setShowPwd] = useState<boolean>(false);
+    const [errMsg, setErrMsg] = useState<string>("");
     const [isFocus, setIsFocus] = useState<boolean>(false);
     const orgTextInput = useRef<HTMLInputElement>(null);
 
-    // const handleOnChange = (e: any) => {
-    //   const { value } = e.target;
-    //   console.log(value);
-    // };
-
     const _onChangeText = (e: any) => {
-      setErrMsg('');
+      setErrMsg("");
       const { value } = e.target;
-      setValueText(value)
-    }
+      setValueText(value);
+    };
+
+    const handleClick = useCallback(() => {
+      //toggle pwd visible
+      if (type === "password") {
+        setShowPwd((last) => !last);
+      } else {
+        onClickRightIcon?.("");
+      }
+    }, [onClickRightIcon, type]);
+
+    const renderRightIcon = useMemo(() => {
+      const isPwdInput = type === "password";
+
+      const icon = isPwdInput ? (!showPwd ? IcPwdShow : IcPwdHide) : rightIcon;
+
+      return (
+        icon && (
+          <img src={icon} className={cx("icon-right")} onClick={handleClick} />
+        )
+      );
+    }, [handleClick, rightIcon, showPwd, type]);
 
     const getValue = () => {
-      return valueText
+      return valueText;
     };
 
     const setErrorMsg = useCallback((msg: string) => {
       if (validate.isStringEmpty(msg)) {
-        return setErrMsg('');
+        return setErrMsg("");
       }
       setErrMsg(msg);
     }, []);
@@ -69,26 +96,35 @@ const MyInputText = forwardRef(
       if (orgTextInput.current) {
         orgTextInput.current?.focus();
       }
-      setIsFocus(true)
-    }, [])
+      setIsFocus(true);
+    }, []);
 
     const blur = useCallback(() => {
       if (orgTextInput.current) {
         orgTextInput.current?.blur();
       }
       setIsFocus(false);
-    }, [])
+    }, []);
 
     return (
       <div className={cx("input")}>
-        <div className={cx('label-container')}>
+        <div className={cx("label-container")}>
           {label && (
-            <label className={cx(styles.label, 'text-gray')}>
-              {label} {important && <span className={cx('text-red')}>*</span>}
+            <label className={cx(styles.label, "text-gray")}>
+              {label} {important && <span className={cx("text-red")}>*</span>}
             </label>
           )}
         </div>
-        <div className={cx(`${containerInput}`, isFocus ? 'focus-input-container' : (errMsg ? 'error-input-container' : 'select-container'))}>
+        <div
+          className={cx(
+            `${containerInput}`,
+            isFocus
+              ? "focus-input-container"
+              : errMsg
+              ? "error-input-container"
+              : "select-container"
+          )}
+        >
           <input
             ref={orgTextInput}
             type={type}
@@ -99,9 +135,9 @@ const MyInputText = forwardRef(
             onChange={_onChangeText}
             maxLength={maxLength}
             className={cx(
-              `${inputStyle ? inputStyle : 'input-style'}`, `${!disabled ? '' : 'disable-input-container'}`
-            )}
+              `${inputStyle ? inputStyle : "input-style"}`, `${!disabled ? "" : "disable-input-container"}`,"outline")}
           />
+          {renderRightIcon}
         </div>
         {errorMessage}
       </div>
