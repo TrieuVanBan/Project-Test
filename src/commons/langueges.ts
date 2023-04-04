@@ -42,6 +42,7 @@ const Languages = {
         welcome:"CHÀO MỪNG ĐẾN VỚI ĐẦU TƯ TIỆN NGAY",
         build:"Xây dựng tương lai",
         approach:"Tiếp cận nhanh chóng các khoản đầu tư có chất lượng cao",
+        download: 'Tải miễn phí trên AppStore/ Google Play',
     }
 };
 

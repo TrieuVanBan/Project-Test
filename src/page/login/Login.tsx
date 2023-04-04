@@ -117,8 +117,8 @@ const Login = () => {
           Languages.auth.password
         )}
         <div className={cx("savePwd")}>
-          <Link to={""} style={{ fontSize: "14px", color: "blue", textDecoration: "none", display: "flex", alignItems: "center" }}> <input type="checkbox" />Lưu mật khẩu </Link>
-          <Link to={"forgotPwd"} style={{ fontSize: "14px", color: "blue", textDecoration: "none" }}>Quên mật khẩu</Link>
+          <Link to={""} style={{ fontSize: "14px", color: "gray", textDecoration: "none", display: "flex", alignItems: "center" }}> <input type="checkbox" />Lưu mật khẩu </Link>
+          <Link to={"forgotPwd"} style={{ fontSize: "14px", color: "#c62828", textDecoration: "none" }}>Quên mật khẩu</Link>
         </div>
         {renderButtonLogin}
         <div className={cx("div-all")}>
