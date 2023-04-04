@@ -1,5 +1,7 @@
 import React, { useCallback, useMemo, useRef } from "react";
 import IcGoogle from '../../assets/icon/ic_google.svg';
+import IcPhone from '../../assets/icon/ic_phone.svg';
+import IcEye from '../../assets/icon/ic_eye.svg';
 import MyInputText from "../../components/input";
 import { TextFieldActions } from "../../components/input/types";
 import { TYPE_INPUT } from "../../commons/constants";
@@ -62,17 +64,18 @@ const Login = () => {
       _label: string,
       _ref: any,
       _type: string,
-      _placeholder: string,
-      _maxLength?: number
+      rightIcon: any,
+      placeHolder: string,
+      _maxLength?: number,
     ) => {
       return (
           <MyInputText
             label={_label}
             ref={_ref}
             type={_type}
-            placeHolder={_placeholder}
             maxLength={_maxLength}
             important
+            {...{rightIcon, placeHolder}}
         />
       );
     },
@@ -107,14 +110,17 @@ const Login = () => {
           Languages.auth.phone,
           refPhone,
           TYPE_INPUT.PHONE,
+          IcPhone,
           Languages.auth.phone,
           10
+          
         )}
         {renderInput(
           Languages.auth.password,
           refPassword,
           TYPE_INPUT.PASSWORD,
-          Languages.auth.password
+          IcEye,
+          Languages.auth.password,
         )}
         <div className={cx("savePwd")}>
           <Link to={""} style={{ fontSize: "14px", color: "gray", textDecoration: "none", display: "flex", alignItems: "center" }}> <input type="checkbox" />Lưu mật khẩu </Link>
