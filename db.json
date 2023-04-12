@@ -1,21 +1,25 @@
 {
-    "users": [{
-        "id": 1,
-        "name": "Triệu Văn Ban",
-        "phone": "0866824564",
-        "email": "bannshd@gmail.com",
-        "password": "12345678"
-    }, {
-        "id": 2,
-        "name": "Ban NSHD",
-        "phone": "0866824565",
-        "email": "bannshd@gmail.com",
-        "password": "123456789"
-    }, {
-        "id": 3,
-        "name": "Ban Hải Dương",
-        "phone": "0866824566",
-        "email": "bannshd@gmail.com",
-        "password": "1234567890"
-    }]
+  "users": [
+    {
+      "id": 1,
+      "name": "Triệu Văn Ban",
+      "phone": "0866824564",
+      "email": "bannshd@gmail.com",
+      "password": "12345678"
+    },
+    {
+      "id": 2,
+      "name": "Ban NSHD",
+      "phone": "0866824565",
+      "email": "bannshd@gmail.com",
+      "password": "123456789"
+    },
+    {
+      "id": 3,
+      "name": "Ban2002",
+      "phone": "0866824566",
+      "email": "bannshd@gmail.com",
+      "password": "1234567890"
+    }
+  ]
 }
