@@ -26,14 +26,14 @@ const Button = ({
   return (
     <div>
       <button
-        className={cx(`${containButtonStyles ? containButtonStyles : ''}`)}
-        // {...rightIcon &&
-        // <MyImage
-        //   src={rightIcon}
-        //   className={rightIconStyles ? cx(`${rightIconStyles}`) : cx('icon-right-styles')}
-        // />}
+        className={cx(`${containButtonStyles ? containButtonStyles : ''}`, "button")}
       >
         {label}
+        {rightIcon &&
+          <MyImage
+            src={rightIcon}
+            className={cx(`${rightIconStyles ? cx(`${rightIconStyles}`) : cx('icon-right-styles')}`, "right-icon")}
+          />}
       </button>
     </div>
   )
