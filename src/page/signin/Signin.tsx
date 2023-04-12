@@ -1,5 +1,8 @@
 import React, { useCallback, useMemo, useRef } from "react";
 import IcGoogle from "../../assets/icon/ic_google.svg";
+import IcPhone from "../../assets/icon/ic_phone.svg";
+import IcProfile from "../../assets/icon/ic_profile.svg";
+import IcEmail from "../../assets/icon/ic_email.svg";
 import MyInputText from "../../components/input";
 import { TextFieldActions } from "../../components/input/types";
 import { TYPE_INPUT } from "../../commons/constants";
@@ -59,6 +62,7 @@ const Signin = () => {
       _ref: any,
       _type: string,
       _placeholder: string,
+      _rightIcon?: string,
       _maxLength?: number
     ) => {
       return (
@@ -67,6 +71,7 @@ const Signin = () => {
           ref={_ref}
           type={_type}
           placeHolder={_placeholder}
+          rightIcon={_rightIcon}
           maxLength={_maxLength}
           important
         />
@@ -136,19 +141,22 @@ const Signin = () => {
           refName,
           TYPE_INPUT.TEXT,
           Languages.auth.name,
+          IcProfile,
           30
         )}
         {renderInput(
           Languages.auth.email,
           refEmail,
           TYPE_INPUT.TEXT,
-          Languages.auth.email
+          Languages.auth.email,
+          IcEmail
         )}
         {renderInput(
           Languages.auth.phone,
           refPhone,
           TYPE_INPUT.PHONE,
           Languages.auth.phone,
+          IcPhone,
           10
         )}
         {renderInput(

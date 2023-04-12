@@ -66,7 +66,7 @@ const Login = () => {
       _ref: any,
       _type: string,
       _placeholder: string,
-      // _rightIcon: string,
+      _rightIcon?: string,
       _maxLength?: number
     ) => {
       return (
@@ -75,7 +75,7 @@ const Login = () => {
           ref={_ref}
           type={_type}
           placeHolder={_placeholder}
-          // rightIcon={_rightIcon}
+          rightIcon={_rightIcon}
           maxLength={_maxLength}
           important
         />
@@ -113,7 +113,7 @@ const Login = () => {
           refPhone,
           TYPE_INPUT.PHONE,
           Languages.auth.phone,
-          // rightIcon={IcPhone},
+          IcPhone,
           10
         )}
         {renderInput(
@@ -121,7 +121,6 @@ const Login = () => {
           refPassword,
           TYPE_INPUT.PASSWORD,
           Languages.auth.password
-          // rightIcon={IcPhone}
         )}
         <div className={cx("savePwd")}>
           <Link
@@ -140,11 +139,7 @@ const Login = () => {
           </Link>
           <Link
             to={"forgotPwd"}
-            style={{
-              fontSize: "14px",
-              color: "#c62828",
-              textDecoration: "none",
-            }}
+            className={cx("link")}
           >
             Quên mật khẩu
           </Link>

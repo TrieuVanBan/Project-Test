@@ -127,7 +127,7 @@ const MyInputText = forwardRef(
         >
           <input
             ref={orgTextInput}
-            type={type}
+            type={showPwd ? 'text' : type}
             // value={value}
             onFocus={focus}
             onBlur={blur}
