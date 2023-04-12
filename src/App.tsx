@@ -6,6 +6,7 @@ import Signin from './page/signin/Signin'
 import Login from './page/login/Login'
 import ForgotPwd from './page/forgot-pwd'
 import LayoutAdmin from './layout/layout-admin'
+import HomePage from './page/home'
 
 function App() {
 
@@ -18,8 +19,8 @@ function App() {
             <Route path="signin" element={<Signin />} />
             <Route path="forgotPwd" element={<ForgotPwd />} />
           </Route>
-          <Route path="/admin" element={<LayoutAdmin />}>
-            <Route index element={<LayoutAdmin />} />
+          <Route path="/home" element={<HomePage />}>
+            <Route index element={<HomePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

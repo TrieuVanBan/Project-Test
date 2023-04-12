@@ -11,5 +11,11 @@
         "phone": "0866824565",
         "email": "bannshd@gmail.com",
         "password": "123456789"
+    }, {
+        "id": 3,
+        "name": "Ban Hải Dương",
+        "phone": "0866824566",
+        "email": "bannshd@gmail.com",
+        "password": "1234567890"
     }]
 }

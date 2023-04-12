@@ -19,7 +19,7 @@ const Login = () => {
   const refPhone = useRef<TextFieldActions>(null);
   const refPassword = useRef<TextFieldActions>(null);
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const isValidateForm = () => {
     const _phone = refPhone.current?.getValue();
@@ -40,22 +40,23 @@ const Login = () => {
     if (isValidateForm()) {
       axios.get(url).then((res) => {
         const isValidUser = res.data.find((item: any) => {
-          // if (item.phone == refPhone.current?.getValue() && item.password == refPassword.current?.getValue()) {
-          //   alert("Đăng nhập thành công")
-          //   navigate("/admin")
-          // } else {
+          if (item.phone == refPhone.current?.getValue() && item.password == refPassword.current?.getValue()) {
+            alert("Đăng nhập thành công")
+            localStorage.setItem("login", JSON.stringify(item));
+            navigate("/home")
+            return item
+          }
+          //  else {
           //   alert("Tài khoản hoặc mật khẩu không chính xác")
           // }
-          return (
-            item.phone == refPhone.current?.getValue() &&
-            item.password == refPassword.current?.getValue()
-          );
+          // return (
+          //   item.phone == refPhone.current?.getValue() &&
+          //   item.password == refPassword.current?.getValue()
+            
+          // );
         });
-        alert(
-          isValidUser
-            ? "Đăng nhập thành công"
-            : "Tài khoản hoặc mật khẩu không chính xác"
-        );
+        // alert(isValidUser? "Đăng nhập thành công" : "Tài khoản hoặc mật khẩu không chính xác");
+        console.log(isValidUser);
       });
     }
   };
